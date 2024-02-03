@@ -48,6 +48,7 @@ body {
     padding: 0;
 }
 .thumbnails-item {
+    order:1;
     border: solid 2px blueviolet;
     margin-bottom: 2vh;
     border-radius: 15%;
