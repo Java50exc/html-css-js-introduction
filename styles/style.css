@@ -1,24 +1,39 @@
-.main-class {
-  display: flex;
-  flex-direction: column;
+html {
+  height: 97%;
 }
-.section-class {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 50vw;
-}
-.div-class {
-  width: 5vw;
-  height: 5vw;
-  border: solid 1px gray
-}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
-html {
-  height: 100%
+
+.board {
+  display: flex;
+  flex-direction: column;
+  border: 1vw outset silver;
+  width: 30vw;
+  height: 30vw;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-grow: 1;
+}
+
+.row:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+section>div {
+  flex-grow: 1;
+  border: none;
+}
+
+section>div:nth-child(odd) {
+  background-color: black;
+}
+
