@@ -28,7 +28,7 @@ body {
     align-self: center;
     justify-content: space-between;
     width: 75vw;
-    height: 70vw;
+    height: 30vh;
 }
 .details-image {
     max-width: 100%;
