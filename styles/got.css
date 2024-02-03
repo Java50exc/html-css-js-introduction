@@ -62,10 +62,10 @@ body {
     text-decoration: none;
 }
 .thumbnails-image {
-    height: 85%;
+    height: 83%;
 }
 .thumbnails-title {
-    display: block;
+    height: 100%;
     text-align: center;
     background-color: antiquewhite;
 }
