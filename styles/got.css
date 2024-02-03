@@ -62,6 +62,7 @@ body {
     text-decoration: none;
 }
 .thumbnails-image {
+    flex-shrink: 0;
     height: 83%;
 }
 .thumbnails-title {
