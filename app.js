@@ -60,7 +60,7 @@ function getDigitsSum(number) {
     do {
         resNumber += number % 10;
     } while(number = Math.trunc(number / 10));
-    
+
     return resNumber;
 }
 
@@ -69,7 +69,7 @@ function computeExpression(expressionStr) {
 }
 
 function printAnanas() {
-    return ("A" + "A" / "S" + "S").toLowerCase();
+    return console.log(("A" + "A" / "S" + "AS").toLowerCase());
 }
 
 
