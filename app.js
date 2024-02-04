@@ -4,27 +4,23 @@
 // let numInt = parseInt(str1, 32);
 // let numFloat = parseFloat(str1);
 function myParseInt(str, base) {
-    const mult = str.charAt(0) == '-';
-    str = mult ? str.substring(1) : str;
+    const isNegative = str[0] == '-';
+    str = isNegative ? str.substring(1) : str;
 
     base = base || 10;
     let res = 0;
     for (let i = 0; i < str.length; i++) {
-        let code = getCode(str[i]);
-        if (!code) {
+        if (str[i] < '0' || str[i] > '9' && str[i] < 'a' || str[i] > 'z') {
             break;
         }
-        res = res * base + code;
+        res = res * base + getCode(str[i]);
     }
-    return mult ? -res : res;
+    return isNegative ? -res : res;
 }
 function getCode(symbol) {
     symbol = symbol.toLowerCase();
     const codeA = 'a'.charCodeAt();
 
-    if (symbol < '0' || symbol > '9' && symbol < 'a' || symbol > 'z') {
-        return undefined;
-    }
     return symbol <= '9' ? +symbol : symbol.charCodeAt() - codeA + 10;
 }
 // let str1 = "ff";
@@ -46,7 +42,7 @@ function getCode(symbol) {
 // let str = "" + number;
 // str = number.toString(36);
 function myToString(number, base) {
-    const mult = number > 0;
+    const isNegative = number > 0;
     number = Math.abs(number);
     let numFract = 0;
     let precision = 0;
@@ -61,7 +57,7 @@ function myToString(number, base) {
         number = Math.trunc(number / 10);
     }
     const res = convert(number, base) + (numFract ? `.${convert(numFract, base)}` : '');
-    return mult ? res : "-" + res;
+    return isNegative ? res : "-" + res;
 }
 
 function convert(number, base) {
@@ -102,5 +98,5 @@ myStr100 = myToString(num100, 16);
 console.log(parseInt("-1111011", 2))
 console.log(myParseInt("-111.1"))
 
-console.log((-123.123).toString())
-console.log(myToString(-123.123))
+console.log((0.45).toString(36))
+console.log(myToString(123.45, 36))
