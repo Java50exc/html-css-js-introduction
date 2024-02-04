@@ -40,6 +40,11 @@ h2 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.hidden.main-class {
+    justify-content: center;
+}
+
 .main-class {
     display: flex;
     flex-direction: column;
@@ -59,6 +64,12 @@ h2 {
 }
 .details-frame {
     position: relative;
+}
+
+#hide-button {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .details-image {
     width: var(--details-image-width);

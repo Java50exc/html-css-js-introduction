@@ -1,14 +1,23 @@
-let detailsImage = document.querySelector(".details-image");
-let detailsTitle = document.querySelector(".details-title");
-let thumbnailsAnchors = document.querySelectorAll(".thumbnails-anchor");
+const detailsImage = document.querySelector(".details-image");
+const detailsTitle = document.querySelector(".details-title");
+const thumbnailsAnchors = document.querySelectorAll(".thumbnails-anchor");
+const mainElement = document.querySelector(".main-class");
 
-function setDetails(anchor) {
-    detailsImage.src = anchor.dataset.detailsImage;
-    detailsTitle.innerHTML = anchor.dataset.detailsTitle;
+const HIDDEN = "hidden";
+
+function unhideDetailsElement() {
+    mainElement.classList.remove(HIDDEN);
 }
 
-for(let i = 0; i < thumbnailsAnchors.length; i++) {
+function hideDetailsElement() {
+    mainElement.classList.add(HIDDEN);
+}
+
+for (let i = 0; i < thumbnailsAnchors.length; i++) {
     thumbnailsAnchors[i].addEventListener("click", function() {
-        setDetails(thumbnailsAnchors[i]);
+        detailsImage.src = thumbnailsAnchors[i].dataset.detailsImage;
+        detailsTitle.innerHTML = thumbnailsAnchors[i].dataset.detailsTitle;
+        unhideDetailsElement();
     });
 }
+document.querySelector("#hide-button").addEventListener("click", () => hideDetailsElement());
