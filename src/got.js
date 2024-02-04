@@ -5,7 +5,7 @@ const mainElement = document.querySelector(".main-class");
 
 const HIDDEN = "hidden";
 
-function unhideDetailsElement() {
+function showDetailsElement() {
     mainElement.classList.remove(HIDDEN);
 }
 
@@ -17,7 +17,7 @@ for (let i = 0; i < thumbnailsAnchors.length; i++) {
     thumbnailsAnchors[i].addEventListener("click", function() {
         detailsImage.src = thumbnailsAnchors[i].dataset.detailsImage;
         detailsTitle.innerHTML = thumbnailsAnchors[i].dataset.detailsTitle;
-        unhideDetailsElement();
+        showDetailsElement();
     });
 }
 document.querySelector("#hide-button").addEventListener("click", () => hideDetailsElement());
