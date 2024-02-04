@@ -46,6 +46,10 @@ h2 {
     justify-content: center;
     flex-grow: 1;
 }
+
+.hidden .details-container {
+    display: none;
+}
 .details-container {
     display: flex;
     flex-direction: column;
@@ -71,6 +75,10 @@ h2 {
     bottom: 3.5vh;
     left: -2vw;
 }
+
+.hidden .thumbnails-list {
+    max-height: 80vh;
+}
 .thumbnails-list {
     display: flex;
     flex-wrap: wrap;
@@ -89,6 +97,7 @@ h2 {
     min-height: calc(var(--thumbnails-image-height) + var(--thumbnails-title-height));
     min-width: var(--thumbnails-image-width);
     max-width: var(--thumbnails-image-width);
+    max-height: calc(var(--thumbnails-image-height) + var(--thumbnails-title-height));;
     margin-left: 1vw;
 }
 .thumbnails-item:hover {
@@ -131,6 +140,11 @@ h2 {
     .details-container {
         justify-content: center;
         margin-bottom: 0;
+    }
+
+    .hidden .thumbnails-list {
+        flex-direction: row;
+        flex-wrap: wrap;
     }
     .thumbnails-list {
         padding-right: 2vw;
