@@ -34,49 +34,72 @@ let res11 = "123" === 123; //false
 let str = "aBdTYg";
 str = str.toLowerCase(); //"abcdtyg"
 
-// HW #11
-function getDigitsSum(number) {
-    //computes sum of all digits in the integer part of the number
-    // number may be either negative or positive or 0
-}
-function computeExpression(expressionStr) {
-    //example of expression "9000 / ((10 + 20) ** 2)"
-    //returns 10
-    //task for searching in Internet
-    //only one line code
-    //how to use Internet for finding required code
-}
-//console.log(computeExpression("9000 / ((10 + 20) ** 2)")) ; //prints 10
-//console.log(computeExpression("9 + 100 / 2")); //prints 59
-function printAnanas() {
-    //TODO 
-    //To use only capital "A" "S"
-    //print "ananas"
-}
-printAnanas() //there should be printed "ananas"
-
-function reverse(number) {
-    //returns string with digits of a given number in the reversed order
-    //number may be either positive or negative
-    //consider only integer part, fractional part should be removed
-    //example reverse(1234.56) should return "4321"
-    //example reverse (-1234) should return "-4321"
-}
-let n = 10;
-let count = 0;
-// while (n > 0) {
-//     n--;
+// let n = 10;
+// let count = 0;
+// // while (n > 0) {
+// //     n--;
+// //     count++;
+// // }
+// // do {
+// //   n--;
+// //   count++
+// // } while(n > 0);
+// while(--n) {
 //     count++;
 // }
-// do {
-//   n--;
-//   count++
-// } while(n > 0);
-while(--n) {
-    count++;
+// let d;
+// // 3 + 7 * "10"
+
+
+
+// HW #11
+function getDigitsSum(number) {
+    number = Math.trunc(Math.abs(number));
+    let resNumber = 0;
+
+    do {
+        resNumber += number % 10;
+    } while(number = Math.trunc(number / 10));
+    
+    return resNumber;
 }
-let d;
-// 3 + 7 * "10"
+
+function computeExpression(expressionStr) {
+    return eval(expressionStr);
+}
+
+function printAnanas() {
+    return ("A" + "A" / "S" + "S").toLowerCase();
+}
+
+
+function reverse(number) {
+    let str = number < 0 ? "-" : "";
+    number = Math.trunc(Math.abs(number));
+
+    do {
+        str += number % 10;
+    } while (number = Math.trunc(number / 10));
+    return str;
+}
+
+//TEST
+console.log(getDigitsSum(123.45) == 6);
+console.log(getDigitsSum(-280.123) == 10);
+console.log(getDigitsSum(123) == 6);
+
+console.log(computeExpression("9000 / ((10 + 20) ** 2)") == 10);
+console.log(computeExpression("9 + 100 / 2") == 59);
+
+printAnanas();
+
+console.log(reverse(123.45) == "321");
+console.log(reverse(-280.123) == "-082");
+console.log(reverse(123) == "321");
+console.log(reverse(-123) == "-321");
+
+
+
 
 
 
