@@ -3,6 +3,7 @@ const detailsTitle = document.querySelector(".details-title");
 const thumbnailsAnchors = document.querySelectorAll(".thumbnails-anchor");
 const mainElement = document.querySelector(".main-class");
 const detailsContainerElement = document.querySelector(".details-container");
+const audio = document.querySelector("audio");
 
 const HIDDEN = "hidden";
 const IS_POINT = "is-point";
@@ -11,7 +12,7 @@ function showDetailsElement() {
     mainElement.classList.remove(HIDDEN);
     detailsContainerElement.classList.add(IS_POINT);
 
-    setTimeout(function() {
+    setTimeout(function () {
         detailsContainerElement.classList.remove(IS_POINT);
     });
 }
@@ -25,6 +26,13 @@ for (let i = 0; i < thumbnailsAnchors.length; i++) {
         detailsImage.src = thumbnailsAnchors[i].dataset.detailsImage;
         detailsTitle.innerHTML = thumbnailsAnchors[i].dataset.detailsTitle;
         showDetailsElement();
+
+        audio.pause();
+        audio.src = thumbnailsAnchors[i].dataset.detailsAudio;
+        audio.play();
     });
 }
-document.querySelector("#hide-button").addEventListener("click", () => hideDetailsElement());
+document.querySelector("#hide-button").addEventListener("click", function() {
+    hideDetailsElement();
+    audio.pause();
+});
