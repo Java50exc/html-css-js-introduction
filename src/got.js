@@ -2,11 +2,18 @@ const detailsImage = document.querySelector(".details-image");
 const detailsTitle = document.querySelector(".details-title");
 const thumbnailsAnchors = document.querySelectorAll(".thumbnails-anchor");
 const mainElement = document.querySelector(".main-class");
+const detailsContainerElement = document.querySelector(".details-container");
 
 const HIDDEN = "hidden";
+const IS_POINT = "is-point";
 
 function showDetailsElement() {
     mainElement.classList.remove(HIDDEN);
+    detailsContainerElement.classList.add(IS_POINT);
+
+    setTimeout(function() {
+        detailsContainerElement.classList.remove(IS_POINT);
+    });
 }
 
 function hideDetailsElement() {

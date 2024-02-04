@@ -60,6 +60,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     margin-bottom: 2vh;
+    transition: 5s;
     
 }
 .details-frame {
@@ -129,8 +130,13 @@ h2 {
     background-color: antiquewhite;
     color: black;
     height: var(--thumbnails-title-height);
-    
 }
+
+.is-point {
+    transform: scale(0.0001);
+    transition: 0s;
+}
+
 @media (min-width: 560px) {
     body {
         --thumbnails-image-width: 12vw;
