@@ -48,18 +48,19 @@ function getCode(symbol) {
 function myToString(number, base) {
     const mult = number > 0;
     number = Math.abs(number);
-    let numInt = Math.trunc(number);
-    let numFract = number - numInt;
+    let numFract = 0;
+    let precision = 0;
 
-    console.log(number);
-    console.log(numInt);
-    console.log(numFract);
-    while (numFract - Math.trunc(numFract)) {
-        numFract *= 10;
-        
+    while (number % 1) {
+        number *= 10;
+        precision++;
     }
-    const res = convert(numInt, base) + (numFract ? `.${convert(numFract, base)}` : '');
 
+    for (i = 0; i < precision; i++) {
+        numFract += number % 10 * 10 ** i;
+        number = Math.trunc(number / 10);
+    }
+    const res = convert(number, base) + (numFract ? `.${convert(numFract, base)}` : '');
     return mult ? res : "-" + res;
 }
 
@@ -88,6 +89,7 @@ function getSymbol(digit) {
     return symbol;
 
 }
+
 let num100 = 990500;
 let str100 = num100.toString();
 let myStr100 = myToString(num100);
@@ -100,5 +102,5 @@ myStr100 = myToString(num100, 16);
 console.log(parseInt("-1111011", 2))
 console.log(myParseInt("-111.1"))
 
-console.log((-123.1).toString())
+console.log((-123.123).toString())
 console.log(myToString(-123.123))
