@@ -27,35 +27,24 @@ const index = array.indexOf(30);
 // const ulElement = `<ul>${ar3.join('')}</ul>`
 //HW #14 (1)
 function coloringString(str1, str2) {
-    //str1 - string
-    //str2 - string
-    //the strings should be with the same length
-    //returns array of following colors
-    //if str2[i] exists in str1 but in another position - i-th color yellow
-    //if str2[i] == str1[i] - i-th color green
-    //if str2[i] doesn't exist in str1 - i -th color red
-    //For getting array from string there is the following expression Array.from(string)
-    //Examples: coloringString("pappy", "apple") => ["yellow","yellow", "green","red", "red"]
-    //coloringString("pappy", "pappy") => ["green", "green", "green", "green", "green"]
+    if (str1.length != str2.length) {
+        return [];
+    }
+    const arrStr1 = Array.from(str1);
 
+    return Array.from(str2).map((e, i) => arrStr1[i] == e ? 'green' : arrStr1.includes(e) ? 'yellow' : 'red');
 }
-//getting array of numbers in a given range. Example as follows 
-// const min = 5;
-// const max = 15;
-// const ar4 = array.filter(function(number) {
-//     return number >= min && number <= max;
-// })
-//getting new array of the elements of the source array with even indexes
+
 const ar5 = array.filter(function (__, index) {
     return index % 2 === 0;
 })
 //HW #14 (2)
 function getNumbersWithDigitsAmount(digitsAmount, array) {
-    //takes: digitsAmount - given number of digits; array - any array of integer numbers
-    //returns array of only numbers from the given array comprising of the given number of digits
-    //examples: 
-    //getNumbersWithDigitsAmount(3, [1, 100, -100, 25, 1000]) returns [100, -100]
+    return array.filter(e => Math.abs(e).toString().length == digitsAmount);
 }
+
+console.log(coloringString("pappy", "apple"));
+console.log(getNumbersWithDigitsAmount(3, [1, 100, -100, 25, 1000]));
 
 
 
