@@ -6,6 +6,7 @@ function getRandomNumber(min, max) {
    
     return min + Math.trunc(Math.random() * (max - min + 1));
 }
+
 function getRandomMatrix(rows, columns, min, max){
     const matrix = [];
     for(let i = 0; i < rows; i++) {
@@ -15,6 +16,15 @@ function getRandomMatrix(rows, columns, min, max){
         }
     }
     return matrix;
+}
+
+function printMatrix(matrix) {
+    console.log('');
+
+    for (let i = 0; i < matrix.length; i++) {
+        console.log(matrix[i]);
+    }
+    console.log('');
 }
 //const matrix = getRandomMatrix(3, 4, 0, 1);
 const ar10 = [1,2,3,4,5];
@@ -31,20 +41,39 @@ const str =ar10.join('_');
 //  </li>
 //</ul>
 function getHtmlUl(array) {
-    //TODO
-    return htmlString;
+    let htmlString = '<ul class="list_class">\n';
+
+    for (let i = 0; i < array.length; i++) {
+        htmlString += `<li class="item_class"><div class="${array[i] == 0 ? 'white' : 'black'}"> </div></li>\n`
+    }
+    return htmlString + '</ul>';
 }
+
+
 const strClass = getRandomNumber(0, 1) === 0 ? 'white' : 'black';
 const str1 = "hello world";
 const str2 = 'hello ' + '"world"';
 const str3 = `class="${strClass}"`;
+
+
 function matrixTransp(matrix) {
-    //TODO
-    //returns transp matrix
-    // matrix = [[1, 2], //input
-    //           [3, 4], 
-    //           [4, 5]        
-    //            ]
-    //  output   [1, 3, 4]
-    //           [2, 4, 5] 
+    const transpMatrix = [];
+
+    for (let i = 0; i < matrix[0].length; i++) {
+        transpMatrix.push([]);
+
+        for (let j = 0; j < matrix.length; j++) {
+            transpMatrix[i].push(matrix[j][i]);
+        }
+    }
+    return transpMatrix;
 }
+
+
+matrix = getRandomMatrix(3, 4, 5, 6);
+
+
+console.log(getHtmlUl([1, 0, 0, 1]));
+
+printMatrix(matrix);
+printMatrix(matrixTransp(matrix));
