@@ -25,11 +25,12 @@ console.log(oddEvenSort([20, -10,333,1000, 552, 7, -7]));
 function evenAscOddDesc(array) {
     return array.sort((e1, e2) => {
       if (Math.abs(e1 % 2) - Math.abs(e2 % 2)) {
-        return e2 % 2 || -1;
+        return Math.abs(e1 % 2) || -1;
       }
       return e1 % 2 ? e2 - e1 : e1 - e2;
     });
 }
+
 console.log(evenAscOddDesc([20, -10,333,1000, 552, 7, -7]));
 /*************************************************************************** */
 //reduce
