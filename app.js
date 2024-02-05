@@ -98,5 +98,5 @@ myStr100 = myToString(num100, 16);
 console.log(parseInt("-1111011", 2))
 console.log(myParseInt("-111.1"))
 
-console.log((0.45).toString(36))
+console.log((1.1).toString(16))
 console.log(myToString(123.45, 36))
