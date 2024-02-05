@@ -31,7 +31,7 @@ function evenAscOddDesc(array) {
     });
 }
 
-console.log(evenAscOddDesc([20, -10,333,1000, 552, 7, -7]));
+console.log(evenAscOddDesc([20, -10,333,1000, 1001, 552, 7, -7]));
 /*************************************************************************** */
 //reduce
 //find sum of the numbers in an array
@@ -58,13 +58,13 @@ function sum(array) {
   //HW #15
   //task reduce.1
   function getMin(array) {
-    return array.reduce((min, cur) => min < cur ? min : cur);
+    return array.reduce((min, cur) => Math.min(min, cur), Infinity);
   }
   console.log(getMin([20, -10,333,1000, 552, 7, -7]));
 
   //task reduce.2
   function getMax(array) {
-    return array.reduce((max, cur) => max > cur ? max : cur);
+    return array.reduce((max, cur) => Math.max(max, cur), -Infinity);
   }
   console.log(getMax([20, -10,333,1000, 552, 7, -7]));
 
@@ -76,16 +76,12 @@ function sum(array) {
 
   //task reduce.4
   function getMinMaxAvg(array) {
-    return array.reduce((acc, cur, index, arr) => {
-      acc[0] = acc[0] < cur ? acc[0] : cur;
-      acc[1] = acc[1] > cur ? acc[1] : cur;
-      acc[2] += cur;
-
-      if (index == arr.length - 1) {
-        acc[2] /= arr.length;
-      }
+    return array.reduce((acc, cur, __, arr) => {
+      acc[0] = Math.min(acc[0], cur);
+      acc[1] = Math.max(acc[1], cur);
+      acc[2] += cur / arr.length;
       return acc;
-    }, [array[0], array[0], 0]);
+    }, [Infinity, -Infinity, 0]);
   }
   console.log(getMinMaxAvg([20, -10,333,1000, 552, 7, -7]));
 
