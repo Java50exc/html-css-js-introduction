@@ -71,15 +71,16 @@ const wordsForGuess = ["pappy", "apple", "table", "gold", "silver", "index",
 
  function finishGame() {
     const fails = lettersDivs.reduce((acc, cur) => cur.style.color == 'green' ? acc : acc + 1, 0);
+    guessInputElement.value = '';
 
     if (flGameOver = !fails || !trials) {
         gameResultElement.innerHTML = !trials ? 'Sorry, but number of trials has ended up' :
         `Congratulations, you have guessed the word using ${word.length + 1 - trials} trials`;
 
         playAgainElement.style.display = 'block';
-        guessInputElement.value = '';
+        
     }
  }
- 
+
  //actions
  startGame();
