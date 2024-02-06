@@ -1,5 +1,7 @@
 .word {
     display: flex;
+    justify-content: space-around;
+    margin-top: 10vh;
 
 }
 .letter {
@@ -8,4 +10,17 @@
     color: black;
     width: 4vw;
     height: 4vw
+}
+
+.word-letter {
+    width: 7vw;
+    height: 7vw;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 4rem;
+}
+
+#letters-remained {
+    display:block;
+    height: 10vh;
 }
