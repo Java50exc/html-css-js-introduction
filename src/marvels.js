@@ -10,7 +10,7 @@ const guessButton = document.getElementById("guess-button");
 let wordLettersElement;
 
 //global variables
-const questionsWords = [["question1", "answer1"], ["question2", "answer2"]];
+const questionsWords = [['AAA', 'aaa'], ["question1", "answer1"], ["question2", "answer2"]];
 let currentIndex = 0;
 let initialLettersNumber;
 let remainedLettersNumber;
@@ -19,18 +19,15 @@ let trials;
 
 //functions
 function startGame() {
-    letterInputElement.disabled = false;
-    wordInputElement.disabled = true;
-
+    currentIndex = (currentIndex + 1) % questionsWords.length;
+    switchInput(true, false);
     wordElement.innerHTML = getWordDivs();
-    
     questionElement.innerHTML = questionsWords[currentIndex][0];
     remainedLettersElement.innerHTML = `remained ${remainedLettersNumber} letters`;
+    wordInputElement.value = '';
     resultMessage.innerHTML = '';
-
     playAgain.style.display = 'none';
-    guessButton.style.display = 'inline-block';
-
+    guessButton.style.display = 'inline-block'; 
     wordLettersElement = Array.from(wordElement.children);
     trials = Math.ceil(initialLettersNumber * 0.7);
 }
@@ -41,13 +38,15 @@ function getWordDivs() {
 }
 
 function checkWord() {
-    const answer = questionsWords[currentIndex][1];
-    if (wordInputElement.value == answer) {
+    const answer = wordInputElement.value;
+    if (answer.length - initialLettersNumber) {
+        wordInputElement.value = '';
+        resultMessage.innerHTML = 'wrong word length';
+    } else {
         remainedLettersNumber = 0;
         wordLettersElement.forEach((e, i) => fillElement(e, answer[i]));
+        finishGame();
     }
-    wordInputElement.value = '';
-    finishGame();
 }
 
 function fillElement(element, letter) {
@@ -69,27 +68,28 @@ function processLetter() {
     letterInputElement.value = '';
     remainedLettersElement.innerHTML = `remained ${remainedLettersNumber} letters`;
 
-    if (remainedLettersNumber == trials)
-        switchInput();
-    else if (!remainedLettersNumber)
+    if (remainedLettersNumber < trials && remainedLettersNumber) {
+        switchInput(false, true);
+    } else if (!remainedLettersNumber)
         finishGame();
 }
 
-function switchInput() {
-    wordInputElement.disabled = wordInputElement.disabled ? 0 : 1;
-    letterInputElement.disabled = letterInputElement.disabled ? 0 : 1;
-}
-
-function takeChance() {
-    switchInput();
+function switchInput(word, letter) {
+    wordInputElement.disabled = word;
+    letterInputElement.disabled = letter;
     guessButton.style.display = 'none';
 }
 
+function takeChance() {
+    switchInput(false, true);
+}
+
 function finishGame() {
-    resultMessage.innerHTML = remainedLettersNumber ? "you lose" : "you win";
+    guessButton.style.display = 'none';
+    const answer = questionsWords[currentIndex][1];
+    resultMessage.innerHTML = !wordInputElement.value || wordInputElement.value == answer ? "you win" : "you lose";
     playAgain.style.display = 'block';
-    letterInputElement.disabled = true;
-    wordInputElement.disabled = true;
+    switchInput(true, true);
 }
 //actions
 startGame();
