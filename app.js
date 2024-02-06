@@ -138,10 +138,8 @@ function getMostPupulatedCountries(employees, counter) {
 console.log(getMostPupulatedCountries(employees, 3));
 
 function isAnagram(word, anagram) {
-    if (word.length - anagram.length) {
+    if (word.length - anagram.length) 
         return false;
-    }
-
     const obj = Array.from(word).reduce((acc, cur, index) => {
         acc[cur] = (acc[cur] || 0) + 1;
         acc[anagram[index]] = (acc[anagram[index]] || 0) - 1;
@@ -149,7 +147,6 @@ function isAnagram(word, anagram) {
     }, {});
     return Object.values(obj).every(e => !e);
 }
-
 console.log(isAnagram('abc', 'bcc'));
 
 
