@@ -42,15 +42,15 @@ const persons = [
 	createPerson(128, "Tolya", createAddress("Lod", "Dizengoff"))
 ] 
 
-function groupBy(array, mapper, reducer) {
-    return array.map(mapper).reduce(reducer, {});
-}
+// function groupBy(array, mapper, reducer) {
+//     return array.map(mapper).reduce(reducer, {});
+// }
 
 
 
-function groupBy1(array, mapper, reducer) {
+function groupBy1(array, extractor, reducer) {
     return array.reduce((acc, cur) => 
-        (acc[mapper(cur)] = reducer(acc[mapper(cur)], cur), acc), 
+        (acc[extractor(cur)] = reducer(acc[extractor(cur)], cur), acc), 
     {});
 }
 
