@@ -1,14 +1,16 @@
- const rectangle = {width: 20, height: 10, square: function () {
-    return this.width * this.height;
-},perimeter: function()  {
-    return this.width * 2 + this.height * 2
-}}
+const rectangle = {
+    width: 20, height: 10, square: function () {
+        return this.width * this.height;
+    }, perimeter: function () {
+        return this.width * 2 + this.height * 2
+    }
+}
 // this.width = 100;
 // this.height = 200;
 // console.log(this)
- console.log(rectangle.square());
- console.log(rectangle.perimeter());
- 
+console.log(rectangle.square());
+console.log(rectangle.perimeter());
+
 class Rectangle {
     #width;
     #height;
@@ -20,7 +22,7 @@ class Rectangle {
         return this.#width * this.#height;
     }
     perimeter() {
-        return this.#width * 2 + this.#height *2
+        return this.#width * 2 + this.#height * 2
     }
 }
 // function Rectangle(width, height) {
@@ -32,46 +34,83 @@ class Rectangle {
 // }
 const rectangle1 = new Rectangle(3, 4);
 console.log(rectangle1.square());
-Rectangle.prototype.square = function() {
+Rectangle.prototype.square = function () {
     return "kuku"
 }
 console.log(rectangle1.square());
 //console.log(rectangle1.perimeter());
+
+
+
+
+
 /* HW #21 */
 // Employe structure and function createEmployee() taken from previous HW
 function createEmployee(id, name, birthYear, salary, city, country) {
-    return {id, name, birthYear, salary, address: {city, country}}
+    return { id, name, birthYear, salary, address: { city, country } }
 }
 class Company {
     #employees //object key: <id value>, value: reference to Employee object
+
     constructor() {
         this.#employees = {};
     }
+
     addEmployee(empl) {
-        //TODO
-        //adds empl into #employees object
-        //returns true if added new employee object
-        //returns false if employee with a given id value already exists
+        if (!this.#employees[empl.id]) {
+            this.#employees[empl.id] = empl;
+            return true;
+        }
+        return false;
     }
+
     removeEmployee(id) {
-        //TODO
-        //removes employee with a given id from #employees object
-        //returns true if removed
-        //returns false if employee with the id doesn't exist
+        return this.#employees[id] ? delete this.#employees[id] : false;
     }
-    getEmployeesCountry(country) {
-        //TODO
-        //returns array of employee objects having field "country" equaled to a given country
+
+    getEmployeesByCountry(country) {
+        if (country) {
+            return this.#getEmployeesByPredicate(e => e.address.country == country);
+        }
+        return undefined;
     }
+
     getEmployeesByAge(age) {
-        //TODO
-        //returns array of employee objects with a given age
+        if (this.#isNumber(age)) {
+            return this.#getEmployeesByPredicate(e => new Date().getFullYear() - e.birthYear == age);
+        }
+        return undefined;
     }
-    getEmployeesBySalaries(salryFrom, salryTo) {
-        //TODO
-        //returns array of employee objects with salary in a given closed range [salaryFrom, salaryTo]
-        //if salaryFrom < 0, then get employees with salary less or equal salaryTo
-        //if salaryTo , 0, then get employees with salary greater or equal salaryFrom
-        //if salaryFrom < 0 && salaryTo < 0, then get all employees
+
+    getEmployeesBySalaries(salaryFrom, salaryTo) {
+        if (this.#isNumber(salaryFrom) && this.#isNumber(salaryTo)) {
+            salaryFrom = salaryFrom <= 0 ? 0 : salaryFrom;
+            salaryTo = salaryTo <= 0 ? Infinity : salaryTo;
+            return this.#getEmployeesByPredicate(e => e.salary >= salaryFrom && e.salary <= salaryTo);
+        }
+        return undefined;
+    }
+
+    #getEmployeesByPredicate(predicate) {
+        const res = [];
+        for (const id in this.#employees) {
+            if (predicate(this.#employees[id])) {
+                res.push(this.#employees[id]);
+            }
+        }
+        return res;
+    }
+
+    #isNumber(number) {
+        return typeof number === 'number' 
+            && !Number.isNaN(number) 
+                && Number.isFinite(number);
     }
 }
+
+let empl = createEmployee(100, 'Vasya', 1993, 15000, 'Ramat Gan', 'Israel');
+let comp = new Company();
+comp.addEmployee(empl);
+
+console.log(comp.removeEmployee(100));
+console.log(comp.addEmployee(empl));
