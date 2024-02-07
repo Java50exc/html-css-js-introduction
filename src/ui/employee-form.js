@@ -4,7 +4,8 @@ export class EmployeeForm {
     #formElement;
     #citiesElement;
     #countriesElement;
-    #inputElements
+    #inputElements;
+
     constructor(idParentForm) {
         const parentFormElement = document.getElementById(idParentForm);
         if (!parentFormElement) {
@@ -35,32 +36,39 @@ export class EmployeeForm {
             </div>
 
         </form>
-        `
+        `;
         this.#formElement = document.getElementById("employee-form");
         this.#countriesElement = document.getElementById("countries");
         this.#citiesElement = document.getElementById("cities");
-        this.#inputElements  = document.querySelectorAll("#employee-form [name]");
+        this.#inputElements = document.querySelectorAll("#employee-form [name]");
         this.setCountries();
         this.setCities();
-        this.#countriesElement.addEventListener("change", () => this.setCities())
+        this.#countriesElement.addEventListener("change", () => this.setCities());
     }
+
     setCountries() {
         this.#countriesElement.innerHTML = Object.keys(employeeConfig.countries)
-        .map(country => `<option value="${country}">${country}</option>`)
+            .map(country => `<option value="${country}">${country}</option>`);
     }
+
     setCities() {
         this.#citiesElement.innerHTML = employeeConfig.countries[this.#countriesElement.value]
-        .map(city => `<option value="${city}">${city}</option>`)
+            .map(city => `<option value="${city}">${city}</option>`);
     }
+
     addFormHandler(handlerFun) {
         this.#formElement.addEventListener('submit', (event) => {
-    event.preventDefault(); //canceling default handler of "submit"
-    const employeeData = Array.from(this.#inputElements)
-    .reduce((res, inputElement) => {
-        res[inputElement.name] = inputElement.value;
-        return res;
-    }, {});
-   handlerFun(employeeData);
-})
+            event.preventDefault(); //canceling default handler of "submit"
+            
+            const employeeData = Array.from(this.#inputElements)
+                .reduce((res, inputElement) => {
+                    res[inputElement.name] = inputElement.value;
+                    return res;
+                }, {});
+            const res = handlerFun(employeeData);
+            if (res) {
+                alert(res);
+            }
+        });
     }
 }
