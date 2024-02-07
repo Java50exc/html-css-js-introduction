@@ -1,6 +1,7 @@
 import { Company, createEmployee } from "./service/company.js";
 import { EmployeeForm } from "./ui/employee-form.js";
 import { Table } from "./ui/table.js";
+import { Tabs } from "./ui/tabs.js";
 
 const schema = [
     {columnName: 'Employee ID', fieldName: 'id'},
@@ -10,9 +11,20 @@ const schema = [
     {columnName: "Country", fieldName: 'country'},
     {columnName: "City", fieldName: 'city'}
 ]
+
+
+const tabsSchema = {
+    'Add Employee' : "form-section",
+     'Show Employees' : "table-section"
+};
+
+
+
+
 const company = new Company();
 const employeeForm = new EmployeeForm("form-section");
 const tableEmployees = new Table("table-section", "Employees", schema);
+const tabs = new Tabs("tabs-section", Object.keys(tabsSchema));
 
 function addEmployee(employeeData) {
    
@@ -24,8 +36,16 @@ function addEmployee(employeeData) {
             employeeData.id = res.id;
             tableEmployees.addRow(employeeData);
         }
-        return res.message
-    
+        return res.message 
 }
-employeeForm.addFormHandler(addEmployee)
+
+function showSection(button) {
+    document.querySelectorAll('section[id]').forEach(e => e.style.display = 'none');
+    document.getElementById(tabsSchema[button.innerHTML]).style.display = 'block';
+}
+
+employeeForm.addFormHandler(addEmployee);
+tabs.addTabsHandler(showSection);
+
+
 
