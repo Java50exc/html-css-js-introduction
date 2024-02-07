@@ -47,19 +47,23 @@ function groupBy(array, mapper, reductor) {
 }
 
 
-//e1
-console.log(groupBy(persons, e => e.address.city, (acc, cur) => (acc[cur] = (acc[cur] || 0) + 1, acc)));
 
-//e2
-console.log(groupBy(persons, e => [e.address.city, e.name], (acc, [c, n]) => {
-    acc[c] = acc[c] || [];
-    acc[c].push(n);
-    return acc;
+function groupBy1(array, mapper, reductor) {
+    return array.reduce((acc, cur) => 
+        (acc[mapper(cur)] = reductor(acc[mapper(cur)], cur), acc), 
+    {});
+}
+
+
+console.log(groupBy1(persons, e => e.address.city, (res, elt) => (res || 0) + 1));
+console.log(groupBy1(persons, e => e.address.city, (res, elt) => {
+    res = res || [],
+    res.push(elt.name);
+    return res;
+}));
+console.log(groupBy1(persons, e => e.name, (res, elt) => {
+    res = res || [],
+    res.push(elt.address.city);
+    return res;
 }));
 
-//e3
-console.log(groupBy(persons, e => [e.name, e.address.city], (acc, [c, n]) => {
-    acc[c] = acc[c] || [];
-    acc[c].push(n);
-    return acc;
-}));
