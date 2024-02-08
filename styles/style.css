@@ -1,0 +1,35 @@
+html {
+    height: 100%;
+}
+
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+section {
+    width: 70%;
+    overflow: hidden;
+}
+
+#video-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+video {
+    width: 100%;
+}
+
+
+
+/* input, select {
+    max-width: 30%;
+} */

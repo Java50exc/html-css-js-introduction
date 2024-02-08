@@ -1,14 +1,27 @@
-import { sleep } from "./utils/sleep.js";
-const TIMEOUT = 5000;
-// const promise = sleep(TIMEOUT);
-// promise.then(() => console.log(`after ${TIMEOUT/1000} seconds`));
-// 
- const fun = async () => {
-   
-await sleep(TIMEOUT);
-console.log(`after ${TIMEOUT/1000} seconds`)
+import {DataForm as Form} from "./ui/input-data-form.js";
+import {VideoPlayer as Player} from "./ui/video-player.js";
+import { checkPlayingTime } from "./service/checkTime.js";
+import { mySleep, sleep } from "./utils/sleep.js";
+
+
+const form = new Form("form-section");
+const player = new Player("video-section");
+
+
+async function playVideo(obj) {
+    let res = checkPlayingTime(obj.time);
+
+    if (res) {
+        return res;
+    }
+    player.setUrl(obj.video);
+    player.start();
+    await mySleep(player, obj.time);
+    player.stop();  
 }
-fun();
-console.log(`waiting for ${TIMEOUT/1000} seconds`)
-console.log("*****************************************")
+
+form.addHandler(playVideo);
+
+
+
 
